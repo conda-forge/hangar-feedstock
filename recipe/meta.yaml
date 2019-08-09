@@ -1,5 +1,5 @@
 {% set name = "hangar" %}
-{% set version = "0.1.1" %}
+{% set version = "0.2.0" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 85bbb1e8fe0cac56ca86257283a96472bd8410443d1b819d0e6b67f0a0d63214
+  sha256: 50e5eb58b868621f493adfb9d6354b0158f59c755bf9fd275fba3b0fa3088540
 
 build:
   number: 0
