@@ -1,5 +1,5 @@
 {% set name = "hangar" %}
-{% set version = "0.3.0" %}
+{% set version = "0.4.0" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 29959e0bb09e01099b9f6d35ad6794a13aff2dc77f9bc2ebd3c4268f421c2642
+  sha256: ea28471102c14622497c7554b46051b4a67009afecfa5235199134fc8f9343a6
 
 build:
   number: 0
-  skip: true  # [py<36]
+  skip: true  # [py<=35 or py>=38]
   entry_points:
     - hangar = hangar.cli:main
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
@@ -22,17 +22,16 @@ requirements:
     - pip
     - python
   run:
-    - blosc-hdf5-plugin  # [not win]
     - click
     - grpcio
     - h5py ==2.9.0
-    - msgpack-python >=0.6
+    - hdf5plugin ==2.0.0
     - numpy
     - protobuf
     - python
     - python-blosc
     - python-lmdb >=0.92
-    - pyyaml
+    - python-xxhash
     - tqdm
     - wrapt
 
@@ -42,8 +41,10 @@ test:
     - hangar.diagnostics
     - hangar.records
     - hangar.remote
+    - hangar.backends
   commands:
     - hangar --help
+    - hangar --version
 
 about:
   home: https://github.com/tensorwerk/hangar-py
