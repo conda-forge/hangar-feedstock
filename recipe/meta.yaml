@@ -1,5 +1,5 @@
 {% set name = "hangar" %}
-{% set version = "0.4.0" %}
+{% set version = "0.5.0" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,25 +7,29 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ea28471102c14622497c7554b46051b4a67009afecfa5235199134fc8f9343a6
+  sha256: 8e962dc51462a664c062f82df35c41612495ac4e431392fca7a4db6fc569e08b
 
 build:
   number: 0
-  skip: true  # [py<=35 or py>=38]
+  skip: true  # [py<=35 or py>=39]
   entry_points:
     - hangar = hangar.cli:main
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 
 requirements:
+  build:
+    - {{ compiler('c') }}
   host:
     - pip
     - python
+    - setuptools >=40.0
+    - wheel >=0.30,
   run:
     - click
     - grpcio
-    - h5py ==2.9.0
-    - hdf5plugin ==2.0.0
+    - h5py >=2.9
+    - hdf5plugin >=2.0
     - numpy
     - protobuf
     - python
@@ -42,6 +46,7 @@ test:
     - hangar.records
     - hangar.remote
     - hangar.backends
+    - hangar.columns
   commands:
     - hangar --help
     - hangar --version
