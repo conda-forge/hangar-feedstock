@@ -25,6 +25,7 @@ requirements:
     - python
     - setuptools >=40.0
     - wheel >=0.30
+    - cython >=0.27
   run:
     - click
     - grpcio
