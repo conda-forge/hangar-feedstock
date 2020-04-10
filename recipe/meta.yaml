@@ -1,20 +1,20 @@
 {% set name = "hangar" %}
-{% set version = "0.5.0" %}
+{% set version = "0.5.1" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8e962dc51462a664c062f82df35c41612495ac4e431392fca7a4db6fc569e08b
+  sha256: 860ca9d8296062c838079cbe80c1f23e42f332f8cab72e223700a65fd25eafc8
 
 build:
   number: 0
   skip: true  # [py<=35]
   entry_points:
     - hangar = hangar.cli:main
-  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 
 requirements:
